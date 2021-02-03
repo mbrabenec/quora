@@ -1,26 +1,53 @@
+import React, { useState } from "react";
 import "./App.css";
-
-import {Question} from "./Question"
+import { Question } from "./Question";
 
 function App() {
+  let [questions, setQuestions] = useState([
+    { nick: "slavo", text: "Why is React the best?" },
+    { nick: "jan", text: "What framework should I use for PHP backend?" },
+    { nick: "bob", text: "What is the magic number?" },
+  ]);
+
+  let [nickName, setNickName] = useState("");
+  let [newQ, setNewQ] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setQuestions([...questions, { nick: nickName, text: newQ }]);
+    setNickName("");
+    setNewQ("");
+  }
 
   return (
     <div className="App">
-      <div>
-        <Question
-          title="What’s the big deal with React.js?"
-          text="What are some facts about why React is technically superior"
-        />
-        <br />
+      {questions.map((q, i) => {
+        return (
+          <Question key={i} nick={questions[i].nick} text={questions[i].text} />
+        );
+      })}
 
-        <Question title="Is React.js worth it?" text="Let us know" />
-        <br />
-
-        <Question
-          title="Should I learn React.js or Vue.js?"
-          text="Basically is it worth it if I learn Vue.js first and then React.js"
-        />
-      </div>
+      <form>
+        <label>
+          Nickname:
+          <input
+            type="text"
+            value={nickName}
+            onChange={(e) => setNickName(e.target.value)}
+          />
+        </label>
+        <label>
+          Question:
+          <input
+            type="text"
+            value={newQ}
+            onChange={(e) => setNewQ(e.target.value)}
+          />
+        </label>
+        <button type="submit" onClick={(e) => handleSubmit(e)}>
+          Submit
+        </button>
+      </form>
     </div>
   );
 }

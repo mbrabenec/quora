@@ -1,21 +1,11 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
-export function Likes (props) {
+export function Likes() {
+  const [likes, setLikes] = useState(0);
 
-    const [likes, setLikes] = useState(0);
+  const handleClick = () => {
+    setLikes(likes + 1);
+  };
 
-    const handleClick = () => {
-        setLikes(likes + 1);
-      };
-
-      return (
-
-       <>
-            <p>Likes: {likes}</p>
-            <button onClick={handleClick}>Like!</button>
-       </>
-
-      )
-
-
+  return <button onClick={handleClick}>{likes}</button>;
 }

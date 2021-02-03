@@ -1,35 +1,12 @@
 import React, { useState } from "react";
 import { Likes } from "./Likes";
 
-export function Answer(props) {
-  const [comment, setComment] = useState("");
-  const [input, setInput] = useState("");
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    setComment(input);
-    setInput("");
-  }
-
+export function Answer({ ans }) {
   return (
-    <div>
-      <p>{props.answer}</p>
+    <div className="answers">
+      {ans}
       <Likes />
-
-      {comment === "" ? <p>No comments yet</p> : <p>{comment}</p>}
-
-      <form>
-        <label>
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-          />
-          <button type="submit" onClick={handleSubmit}>
-            Comment
-          </button>
-        </label>
-      </form>
+      {/* <Comments /> */}
     </div>
   );
 }
